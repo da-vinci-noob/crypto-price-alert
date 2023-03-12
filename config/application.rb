@@ -23,6 +23,14 @@ module CryptoPriceAlert
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    # Redis configuration with connection pool
+    config.cache_store = :redis_cache_store, {
+      url: Rails.application.config_for(:redis).cache_url,
+      driver: :hiredis,
+      pool_size: ENV.fetch('RAILS_MAX_THREADS') { 20 },
+      pool_timeout: 5
+    }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

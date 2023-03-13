@@ -98,6 +98,7 @@ GEM
       concurrent-ruby (~> 1.0)
       zeitwerk (~> 2.6)
     erubi (1.12.0)
+    event_emitter (0.2.6)
     globalid (1.1.0)
       activesupport (>= 5.0)
     hiredis (0.6.3)
@@ -174,9 +175,16 @@ GEM
       zeitwerk (~> 2.5)
     rake (13.0.6)
     redis (4.8.1)
+    redis-client (0.14.0)
+      connection_pool
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
+    sidekiq (7.0.6)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     thor (1.2.1)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -188,6 +196,10 @@ GEM
       dry-configurable (>= 0.13, < 2)
       jwt (~> 2.1)
       warden (~> 1.2)
+    websocket (1.2.9)
+    websocket-client-simple (0.6.1)
+      event_emitter
+      websocket
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -211,7 +223,9 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.4, >= 7.0.4.2)
   redis (~> 4.0)
+  sidekiq (~> 7.0, >= 7.0.6)
   tzinfo-data
+  websocket-client-simple (~> 0.6.1)
 
 RUBY VERSION
    ruby 3.2.1p31

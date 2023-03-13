@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
+  user_mailer:
+    price_alert:
+      subject: 'Price Trigger Alert'

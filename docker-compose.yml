@@ -1,0 +1,44 @@
+version: '3.9'
+services:
+  pg_database:
+    image: postgres:15
+    volumes: 
+     - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    env_file: .env
+    environment:
+      POSTGRES_DB: crypto_price_alert_production
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+  redis_db:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data:/data
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && /myapp/bin/setup && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    env_file: .env
+    depends_on: 
+      - pg_database
+      - redis_db
+  sidekiq:
+    depends_on:
+      - 'pg_database'
+      - 'redis_db'
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    env_file: .env
+    volumes:
+      - '.:/myapp'
+      - '/myapp/tmp' # don't mount tmp directory
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis_db:6379/0
+

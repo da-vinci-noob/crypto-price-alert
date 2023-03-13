@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
     if resource.persisted?
       render json: { message: 'You are logged in.' }, status: :ok
     else
-      render json: { message: 'You are not logged in.' }, status: :not_found
+      render json: { message: 'You are not logged in.' }, status: :unauthorized
     end
   end
 

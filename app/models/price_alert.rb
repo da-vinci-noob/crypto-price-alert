@@ -7,6 +7,7 @@ class PriceAlert < ApplicationRecord
   validates :target_price, uniqueness: { scope: :status, if: -> { status == 'created' } }
 
   before_save :add_operator
+  after_create :cache_to_redis
 
   private
 
@@ -19,5 +20,9 @@ class PriceAlert < ApplicationRecord
     else
       '>='
     end
+  end
+
+  def cache_to_redis
+    ReadCache.redis.sadd('target_alerts', self.to_json)
   end
 end

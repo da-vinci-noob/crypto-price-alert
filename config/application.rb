@@ -35,6 +35,18 @@ module CryptoPriceAlert
       pool_timeout: 5
     }
 
+    # SMTP settings for gmail
+    config.action_mailer.smtp_settings = {
+      address: ENV['SMTP_ADDRESS'],
+      port: ENV['SMTP_PORT'],
+      user_name: ENV['SMTP_USERNAME'],
+      password: ENV['SMTP_PASSWORD'],
+      domain: 'smtp.gmail.com',
+      authentication: 'login',
+      tls: false,
+      enable_starttls_auto: true,
+    }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

@@ -1,4 +1,7 @@
 # BTC Price Tracker App
+A Rails API App used for Price Tracking Alert for BTC prices.
+You can create multiple alerts for different target prices and all are user specific.
+An Email will be sent to user's email address when the target price hits.
 
 ## Setup
 
@@ -44,6 +47,8 @@ REDIS_URL: Redis URL
 * Filter Alerts Based on their Status [Created, Triggered, Deleted]
 * Sending Mails on the Price Trigger.
 * Prices are checked from the Binance Websocket.
+* For Triggering Price, A websocket connection is opened to Binance. On each price update, User created target prices are checked from redis if they are greater/less/equal based on the prices they are created at.
+* For the Websocket connection and triggering price, Sidekiq Background Job is used.
 > ### This Project uses SWAGGER for the API Documentation.
 1. Goto `/api-docs` for the complete documentation and test.
 2. Login, Get the Bearer Token from the Response Headers

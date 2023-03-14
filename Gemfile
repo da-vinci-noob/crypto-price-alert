@@ -46,12 +46,15 @@ gem 'connection_pool'
 
 gem 'websocket-client-simple', '~> 0.6.1'
 gem 'sidekiq', '~> 7.0', '>= 7.0.6'
+gem 'rswag', '~> 2.8'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   # gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails', '~> 2.8', '>= 2.8.1'
   gem 'pry', '~> 0.14.2' # Debugging
+  gem "rspec-rails"
+  gem "rswag-specs"
 end
 
 group :development do

@@ -55,6 +55,8 @@ paths:
       tags:
         - Users
       summary: Log Out
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Successful response
